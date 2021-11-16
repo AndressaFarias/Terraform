@@ -37,6 +37,33 @@ _exemplo:_
 * null      : é a forma de expressar o inexistente. quando um parâmetro recebe o valor null automaticamente o recurso é removido/omitido do recurso.
 
 # Referencias
-referencia faz parte do uso mais elementar do terraform.como funciona:
-<RESOURCE_TYPE>.<NAME>
-    
+referencia faz parte do uso mais elementar do terraform.os tipos de referencimanto:
+
+##  <RESOURCE_TYPE>.<NAME> 
+referencia um tipo de recurso e o nome que foi dado a esse recurso. aponta para recursos.
+
+_exemplo_:
+    output "ip_address" {
+        *value = aws_instance.web.public_ip*
+    }
+
+## var.<NAME>
+
+## local.<NAME>
+
+## module.<MODULE_NAME>.<OUTPUT_NAME>
+
+## data.<DATA_TYPE>.<NAME>
+`data` olha para o provider que foi definido e pede um dado especifico.
+
+`most_recente=true`traz a imagem mais recente;
+`filter{}` filtros para localizar um informação especifica;
+
+* path.module
+
+* path.root
+
+* path.cwd
+
+* terraform.workspace
+ 
