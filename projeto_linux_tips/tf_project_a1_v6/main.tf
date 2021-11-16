@@ -3,12 +3,6 @@ provider "aws" {
   version = "~> 3.0"
 }
 
-provider "aws" {
-  alias = "west"
-  region  = "us-west-2"
-  version = "~> 3.0"
-}
-
 terraform {
   /*Esse bloco determina que o arquivo tfstate seja salvo na aws
   para que o arquivo seja salvo localmente é só excluir esse bloco */
