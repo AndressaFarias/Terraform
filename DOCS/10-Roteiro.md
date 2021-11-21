@@ -12,7 +12,7 @@
     export AWS_SECRET_ACCESS_KEY=<Secret access key>
     ~~~
 
-6. Executar o comando `terraform init` 
+6. Executar o comando `terraform init` - cria a pasta terraform
     Pasta <tf_project_a1_v1>
 
 # tf_project_a1_v2
@@ -30,6 +30,7 @@
 
 9. Executar o comando: 
     `terraform plan -out NomeDoPlano`
+  
 
 10. <tf_project_a1_v3>
 - Adicionado o arquivo de output.tf;
@@ -39,8 +40,10 @@
 - será possivel o o IP da instancia que foi criada.
 - o bloco outoput no fim do terraform plan, retorna o IP da instancia.
 
+11. <tf_project_a1_v3b>
+Outra forma de utilizar o ouput juntamente com o parametro count
 
-11. <tf_project_a1_v4>
+12. <tf_project_a1_v4>
 - adicionado o bloco `data`no arquivo **ec2.tf**;
 - muda a declaração da ami de hardcode para usar referencia;
 - `terraform init -upgrade`;
@@ -51,7 +54,7 @@
     - `data.aws_ami.ubuntu` : retorna todo o map de informações desse recursos;
     - `data.aws_ami.ubuntu.id` : retorna o id da ami que eu desejo
 
-12. <tf_project_a1_v5>
+13. <tf_project_a1_v5>
 - uso de alias e version
 - duplicar os blocos:
     - *provider "aws"* e add o alias
@@ -60,7 +63,14 @@
 - > terraform plan -out plano
 - > terraform apply plano
 
-13. 12. <tf_project_a1_v6>
-- Adicionar o arquivo variables.tf
-- Criar o arquivo arquivo .tfvars
+14. <tf_project_a1_v6>
+- Adicionado o arquivo variables.tf
+- `terraform init -upgrade`;
+- `terraform plan -out plano`;
+- `terraform apply plano`;
+- rodar novamente passando a variavel por linha de comando
+- `terraform plan -var image_id="xxx" -out plano`
+- Criado arquivo arquivo .tfvars
+- `terraform plan -var-file="variables.tfvars" -out plano`
 - Criar um arquivo .auto.tfvars
+

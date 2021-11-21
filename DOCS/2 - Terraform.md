@@ -18,7 +18,7 @@ Esse arquivo de estado, salvo localmente **não é algo seguro**, sendo então i
    `-out=path` : tranfere para um arquivo o plan que foi apresentado, garantindo o qye será aplicado aqui que foi visto.
 
 `terraform apply`
-    aplica o que foi definido no plan 
+    aplica o que foi definido no plan  e cria o arquivo de estado;
 
 `terraform destroy`
     destroy udo o qu está no HCL.
@@ -41,21 +41,70 @@ Todos os providers podem receber dois metaargumento:
  <tf_project_a1_v5>
 
 
- # Variables -  <tf_project_a1_v6>
- Variavel possibilita variar o comportamento da variavel.
-    para declarar um vasriavel será utilizado o bloco `variable`e esse bloco não pssui tipo.
-        *exemplo:*
-        ~~~yaml
+# Expressions
+* string    : "hello"
+* number    : 123
+* bool      : podem ser `true`ou `false`. valores boleanos podem ser usados condição lógica;
+* list      : também conhecido como tupla, é um sequencia de valores ["us-west-1a", "us-west-1c"]. Os elementos de uma lista são identificados por numeros sequenciais, iniciando em zero. Pode ser uma lista de strings, numeros, booleandos...
+* map       : ou object, é um grupo de objetos identificados por labels, chave-valor: {name: "Mabel", age = 52}
+* null      : é a forma de expressar o inexistente. quando um parâmetro recebe o valor null automaticamente o recurso é removido/omitido do recurso.
+
+
+
+# Referencias
+referencia faz parte do uso mais elementar do terraform.os tipos de referencimanto:
+referencia um outro recurso qe foi definido no terraform.
+
+##  <RESOURCE_TYPE>.<NAME> 
+referencia um tipo de recurso e o nome que foi dado a esse recurso. aponta para recursos.
+
+_exemplo_:
+    output "ip_address" {
+        *value = aws_instance.web.public_ip*
+    }
+
+## var.<NAME>
+
+## local.<NAME>
+
+## module.<MODULE_NAME>.<OUTPUT_NAME>
+
+## data.<DATA_TYPE>.<NAME>
+`data` olha para o provider que foi definido e pede um dado especifico.
+
+`most_recente=true`traz a imagem mais recente;
+`filter{}` filtros para localizar um informação especifica;
+
+* path.module
+
+* path.root
+
+* path.cwd
+
+* terraform.workspace
+ 
+
+
+# Variables>
+<tf_project_a1_v6>.
+
+Para declarar um variavel será utilizado o bloco `variable` e esse bloco não possui tipo.
+    *exemplo:*
+    ~~~yaml
         variable "image_id{
-            type = string
-        }
-        ~~~
+        type = string
+      }
+    ~~~
     dentro de um bloco podem ser usados alguns argumentos:
 
-   * default : possibilita definir um valor padrão
-   * type constraints : indica o tipo do valor que é esperado apra aquela variavel; (string, number, bool, listas de tipos primitivos)
-   * description : descrição qual o intuioto da variavel 
-   * custom validation rules : informa qual a condição de validação para que o valor seja aceito.
+   * default : possibilita definir um valor padrão; oferece uma valor padrão para uma variavel, se o default, não for declarado é obrigatório que o valor seja informado;
+
+   * type constraints : indica o tipo do valor que é esperado para aquela variavel declarada; (string, number, bool, listas de tipos primitivos);
+
+   * description : descrição de qual o intuito pelo qual a variavel foi criada;
+
+   * custom validation rules - condition : informa qual a condição de validação para que o valor seja aceito.
+
    * sensitive : quando definido como true, esse valor não é apresentado na console.
 
     ~~~yaml
@@ -72,8 +121,12 @@ Todos os providers podem receber dois metaargumento:
     ~~~
 
 ## USANDO VARIAVEIS
-* pode ser declaro na linah de comando:
-    terraform plan -var image_id="ami-1234" -out plano
+* pode ser declarado na linha de comando:
+    `terraform plan -var image_id="ami-1234" -out plano`
+
+* Pode ser feita a referencia para a variavel.
+    Para isso o bloco da variavel deve ser referenciado
+    Por exemplo, no bloco `resource "aws_instance" "web"`a ami era obtida com a referencia ao recurso `data.aws_ami.ubuntu.id` ao declarar a ami como variavel, e tendo um valor default o ami pode ser referenciado com o comando `var.image_id`
 
 * podem ser informadas através do arquivo .tfvars
 
@@ -81,7 +134,7 @@ Todos os providers podem receber dois metaargumento:
 
 * variavesl de ambinete.
 
-precedencia : export > tfvars > auto > -var-file
+precedencia : export < tfvars < auto < linha de comando (`-var-file` ou `-var`)
 
 
 
@@ -109,3 +162,4 @@ precedencia : export > tfvars > auto > -var-file
    ~~~
    embora o valor não esteja explicito na declaração do bloco é possível obeter ele. 
    
+# MODULOS   
