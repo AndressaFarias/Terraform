@@ -5,6 +5,7 @@
 3. Instalar o Docker;
 
 4. Executar o Terraform no docker;
+docker run -it -v $PWD:/app -w /app --entrypoint "" hashicorp/terraform:light sh 
 
 5. Dentro do container exportar as credenciais: 
     ~~~sh
@@ -74,3 +75,19 @@ Outra forma de utilizar o ouput juntamente com o parametro count
 - `terraform plan -var-file="variables.tfvars" -out plano`
 - Criar um arquivo .auto.tfvars
 
+# AULA 2
+1. <tf_project_a2_v1> 
+- Criar pasta `servers`;
+- add na pasta os arquivos ec2.tf, output.tf e variables.tf;
+- criar o arquivo terrafile.tf e add o bloco module -- [Bloco Modulo](https://www.terraform.io/docs/language/modules/syntax.html)
+- add a variavel _servers_ no arquivo variables.tf, sem informar valor default.
+Porém a variavel apenas foi definida, não está sendo usada, vamos então configurar no arquivo ec2.tf o uso dessa variavel. 
+- No bloco `"aws_instance" "web`, vamos adicionar um count referenciando a variavel.
+- terraform init --upgrade //para inicilaira o modulos
+- terraform plan -out plano
+- terraform apply plano
+Como o output está dentro do bloco filho, precisamos manipular o output do modulo filho, para acessar o output do modulo filho e usamos a sintaxe `module.<NomeDoModulo>.<NomeDoOutputDoModuloFilho> =ex: module.servers.ip_address
+- add o ouput no arquivo terrafile.tf
+- o output cadastrado será retornado em nossa console
+
+2. 

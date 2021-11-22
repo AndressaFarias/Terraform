@@ -162,4 +162,33 @@ precedencia : export < tfvars < auto < linha de comando (`-var-file` ou `-var`)
    ~~~
    embora o valor não esteja explicito na declaração do bloco é possível obeter ele. 
    
-# MODULOS   
+# MODULOS
+<https://www.terraform.io/docs/language/modules/index.html>
+
+Módulos são a forma de reunir todas configurações -  recursos, data, outuput, etc - do terraform em um lugar.
+
+É um modo de o pessoal de operações configurar um modulo e oferecer à outros times para serem usados.
+
+Quando um arquivo não define o uso de módulos ele é considerado um _root modules_.
+
+O output padrão ocorre somente vindo do modulo raiz. o output que vai do modulo filho para o módulo raiz é precido configurar para que ele apareça na console.
+
+O ideal é que o bloco provider esteja no _root module_.
+
+O mesmo pode ser usado multiplas vezes, apenas o nome deve ser diferente (é possível que ao inserir um os mesmos inputs ocorra conflito).
+
+
+## Source Modules
+Há diversas formas de referenciar o módulo.
+
+## Bloco modules
+Dentro do bloco modules tudo o que for diferente de _source, version e providers_ são inputs que o root module está enviando ao child module.
+
+~~~yml
+module "servers"{
+    source = "../servers"
+    servers = 2
+}
+~~~
+
+
