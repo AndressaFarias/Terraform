@@ -192,3 +192,23 @@ module "servers"{
 ~~~
 
 
+# Beckend
+<https://www.terraform.io/docs/language/settings/backends/index.html>
+Cada 
+Backend vai ter seus parametros de configuração especificos.
+
+
+
+## Configuração parcial
+Não é preciso informar todos os dados para a configuração no bloco do backend, é possível fazer a configuração de algumas formas:
+* pela console - no init
+* variavel de ambiente : apenas alguns backends aceitam esse tipo de configuração.
+
+## State Storage and Locking
+* Nem todos os backends possuem suporte o locking;
+* `terraform state pull >> state-local.tfstate` esse comando baixa o tfstate para estar acesivel localmente
+* `terraform state push state-local.tfstate`:: state-local.tfstate é o nome do arquivo state que se deseja subir.
+    * se for feita alguma alteração no arquivo de estate será preciso incrementar o parametro serial, para que não retorne erro referente ao fato de o arquivo ter sofrido alteração e ainda possuir o mesmo serial.
+
+### State Locking
+Permite que seja bloqueada a escrita no arquivo de state.

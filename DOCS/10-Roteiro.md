@@ -90,4 +90,10 @@ Como o output está dentro do bloco filho, precisamos manipular o output do modu
 - add o ouput no arquivo terrafile.tf
 - o output cadastrado será retornado em nossa console
 
-2. 
+2. <>
+- Criar/configurar o arquivo **dynamodb.tf**
+- terraform init
+- terraform plan -target=module.mymodule. aws_instance.myinstance
+exemplo: terraform plan -out plano -target=resource.aws_dynamodb_table.dynamodb-tf-state-lock
+- é preciso informar no bloco backend qual o nome da tabela do dynamo que está sendo usada - main.tf
+- para aplicar o `destroy` em recurso que usem o locking é indicado que ao executar o comendo seja informado `-lock=false`
