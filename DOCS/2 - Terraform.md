@@ -212,3 +212,16 @@ Não é preciso informar todos os dados para a configuração no bloco do backen
 
 ### State Locking
 Permite que seja bloqueada a escrita no arquivo de state.
+
+# STATE
+<https://www.terraform.io/docs/language/state/index.html>
+
+State é a forma que o Terraform armazena as informações sobre a infra.
+
+Geralmente é um arquivo .json.
+
+Pq o Terraform não funciona sem state?
+   - Pois mapeia o "mundo real" (provider) com o arquivo de configuração;
+   - Faz o mapeamento de dependencias entres os recursos, através do metadata;
+   - Performance : --refreshing=false (!buscar mais infos)
+   - Syncing : 
