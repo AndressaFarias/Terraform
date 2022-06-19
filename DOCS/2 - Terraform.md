@@ -146,7 +146,7 @@ precedencia : export < tfvars < auto < linha de comando (`-var-file` ou `-var`)
    ~~~ yaml
     output "ip_address" {
     value = aws_instance.web.public_ip
-    }
+   }
    ~~~
 
    vai printar o recurso `public_ip`. esse recurso está sendo criado no arquivo **ec2.tf** no bloco
@@ -160,7 +160,7 @@ precedencia : export < tfvars < auto < linha de comando (`-var-file` ou `-var`)
     }
     }
    ~~~
-   embora o valor não esteja explicito na declaração do bloco é possível obeter ele. 
+   embora o valor não esteja explicito na declaração do bloco é possível obter ele. 
    
 # MODULOS
 <https://www.terraform.io/docs/language/modules/index.html>
