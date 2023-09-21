@@ -1,9 +1,9 @@
 # Terraform
 
 ## Funcionamento 
-O terraform possui um arquivo de definição (HCL) e um binário do Terraform. O binário - aplicação - lê o arquivo de definição, que é descrito, e aplica o que foi definido.
+O terraform possui um arquivo de definição (HCL) e um binário do Terraform. O binário - aplicação - lê o arquivo de definição, que é descritivo, e aplica o que foi definido.
 
-O Terraform possui um arquivo de estado, em que ele guarda o último estado - configuração - que foi aplicado. 
+O Terraform possui um arquivo de estado em que ele guarda o último estado - configuração - que foi aplicado. 
 
 O Binário usa o arquivo de estado para verificar se houve alguma alteração no arquivo de definição que necessite ser aplicada. 
 
