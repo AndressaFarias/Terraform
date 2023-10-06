@@ -20,3 +20,12 @@ Um servidor vai sofrendo alterações para que atenda às necessidades que surge
 
 ## Infra Imutável
 Se é necessário instalar uma nova ferramenta, um novo servidor é criado e efetuado o apontamento de DNS para esse novo servidor que contém a nova ferramenta. Caso haja a necessidade de _rollback_, basta trocar o apontamento para o servidor antigo.
+
+
+# Cloud
+
+- Abstração de Serviços.
+
+## API
+
+É software que escuta em um determinada porta os comandos que são enviadas e transformam em ações dentro da cloud.
